@@ -98,7 +98,7 @@ jobs:
 
     - name: commit
       id: commit
-      using: swinton/commit@v2.0.0
+      uses: swinton/commit@v2.0.0
       with:
         files: |
           ${{steps.jarName.outputs.jarName}}
