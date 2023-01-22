@@ -99,7 +99,7 @@ jobs:
         git add ${{steps.jarName.outputs.jarName}}
         jarName=${{steps.jarName.outputs.jarName}}
         filePath="${jarName##*workflows/}"
-        echo filePath
+        echo ${filePath}
         echo "file=${filePath}" >> #$GITHUB_OUTPUT
 
     - name: commit
