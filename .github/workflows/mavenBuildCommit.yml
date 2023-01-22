@@ -42,8 +42,9 @@ jobs:
       id: mavenBuild
       run: mvn -B package --file pom.xml
 
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@v2.0.1
+    # Error: Could not generate a snapshot of the dependencies; Cannot read properties of undefined (reading 'forEach')
+    #- name: Update dependency graph
+    #  uses: advanced-security/maven-dependency-submission-action@v2.0.1
       
     - uses: actions/upload-artifact@v3
       id: upload
