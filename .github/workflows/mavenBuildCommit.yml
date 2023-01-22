@@ -108,7 +108,7 @@ jobs:
       with:
         files: |
           ${{steps.add.outputs.file}}
-        commit-message: build jar file by GitHubAction(maven.yml)
+        commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
         ref: refs/heads/main
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
@@ -120,8 +120,7 @@ jobs:
         body: |
           build generated jar file on ${{ steps.commit.outputs.commit-sha }}
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
-          [skip ci]
-          
+
     - name: create-commit-comment-jarCmt
       uses: peter-evans/commit-comment@v2
       with:
