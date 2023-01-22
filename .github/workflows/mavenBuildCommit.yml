@@ -100,7 +100,7 @@ jobs:
       uses: swinton/commit@v2.0.0
       with:
         files: |
-          bash ${${{steps.jarName.outputs.jarName}}##/target/}
+          $(bash ${${{steps.jarName.outputs.jarName}}##/target/})
         commit-message: build jar file by GitHubAction(maven.yml)
         ref: main
       env:
