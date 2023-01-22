@@ -92,28 +92,37 @@ jobs:
         git config --local user.email "mavenBuildCommit.yml@workflow.github.yui.eng.pro"
         git config --local user.name "GitHub Action"
 
-    - name: Commit files
-      id: commit
+    - name: add
       run: |
         git add ${{steps.jarName.outputs.jarName}}
-        git commit -m "build jar file by GitHubAction(maven.yml)" -a
-        git push
-        echo "sha=$(git show --format='%H' --no-patch)" >> $GITHUB_OUTPUT
+
+    - name: commit
+      id: commit
+      using: swinton/commit@v2.0.0
+      with:
+        files: |
+          ${{steps.jarName.outputs.jarName}}
+        commit-message: build jar file by GitHubAction(maven.yml)
+        ref: main
       env:
         GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+
+    - name: push
+      run: |
+        git push
 
     - name: create-commit-comment-orgCmt
       uses: peter-evans/commit-comment@v2
       with:
         sha: ${{ needs.build.outputs.targetSha }}
         body: |
-          build generated jar file on ${{ steps.commit.outputs.sha }}
+          build generated jar file on ${{ steps.commit.outputs.commit-sha }}
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
           
     - name: create-commit-comment-jarCmt
       uses: peter-evans/commit-comment@v2
       with:
-        sha: ${{ steps.commit.outputs.sha }}
+        sha: ${{ steps.commit.outputs.commit-sha }}
         body: |
           build generated jar file on ${{ needs.build.outputs.targetSha }}
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
