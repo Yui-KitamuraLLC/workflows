@@ -98,8 +98,8 @@ jobs:
       run: |
         git add ${{steps.jarName.outputs.jarName}}
         jarName=${{steps.jarName.outputs.jarName}}
-        echo ${jarName##*workflows/}
-        filePath="${jarName##*workflows/}"
+        filePath=${jarName##*workflows/}
+        echo filePath
         echo "file=${filePath}" >> #$GITHUB_OUTPUT
     - name: commit
       id: commit
