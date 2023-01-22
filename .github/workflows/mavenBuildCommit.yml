@@ -95,18 +95,16 @@ jobs:
     - name: add
       run: |
         git add ${{steps.jarName.outputs.jarName}}
-
     - name: commit
       id: commit
       uses: swinton/commit@v2.0.0
       with:
         files: |
-          ${{steps.jarName.outputs.jarName}}
+          bash ${${{steps.jarName.outputs.jarName}}##/target/}
         commit-message: build jar file by GitHubAction(maven.yml)
         ref: main
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-
     - name: push
       run: |
         git push
