@@ -120,6 +120,7 @@ jobs:
         body: |
           build generated jar file on ${{ steps.commit.outputs.commit-sha }}
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
+          [skip ci]
           
     - name: create-commit-comment-jarCmt
       uses: peter-evans/commit-comment@v2
