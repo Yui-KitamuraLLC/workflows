@@ -11,6 +11,13 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_call:
+    secrets:
+      APP_ID:
+        description: 'the app id of your GitHubApp'
+        required: true
+      SECRET:
+        description: 'the secret key of your GitHubApp'
+        required: true
 
 jobs:
   build:
