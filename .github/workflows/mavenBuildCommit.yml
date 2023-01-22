@@ -58,6 +58,9 @@ jobs:
   attachComment:
     runs-on: ubuntu-latest
     needs: build
+    defaults:
+      run:
+        shell: bash
     steps:
 
     - uses: actions/checkout@v3
