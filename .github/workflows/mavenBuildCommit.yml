@@ -93,14 +93,16 @@ jobs:
         git config --local user.name "GitHub Action"
 
     - name: add
+      id: add
       run: |
         git add ${{steps.jarName.outputs.jarName}}
+        echo "file=${ ${{steps.jarName.outputs.jarName}}##'/workflows/workflows/' }" >> #GITHUB_OUTPUT
     - name: commit
       id: commit
       uses: swinton/commit@v2.0.0
       with:
         files: |
-          $(bash ${${{steps.jarName.outputs.jarName}}##/target/})
+          ${{steps.add.outputs.file}}
         commit-message: build jar file by GitHubAction(maven.yml)
         ref: main
       env:
