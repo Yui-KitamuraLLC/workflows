@@ -112,9 +112,6 @@ jobs:
         ref: refs/heads/main
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-    - name: push
-      run: |
-        git push
 
     - name: create-commit-comment-orgCmt
       uses: peter-evans/commit-comment@v2
