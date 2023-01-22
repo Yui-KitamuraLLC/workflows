@@ -100,7 +100,7 @@ jobs:
         jarName=${{steps.jarName.outputs.jarName}}
         filePath="${jarName##*workflows/}"
         echo ${filePath}
-        echo "file=${filePath}" >> #$GITHUB_OUTPUT
+        echo "file=${filePath}" >> $GITHUB_OUTPUT
 
     - name: commit
       id: commit
