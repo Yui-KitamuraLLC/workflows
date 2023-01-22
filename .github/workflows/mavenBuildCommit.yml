@@ -106,7 +106,8 @@ jobs:
       run: |
         git add ${{steps.jarName.outputs.jarName}}
         jarName=${{steps.jarName.outputs.jarName}}
-        filePath="${jarName##*workflows/}"
+        repoName=${github.repository#${github.repository_owner}/}
+        filePath="${jarName##*${repoName}/}"
         echo ${filePath}
         echo "file=${filePath}" >> $GITHUB_OUTPUT
 
