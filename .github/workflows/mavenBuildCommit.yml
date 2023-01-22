@@ -98,9 +98,10 @@ jobs:
       run: |
         git add ${{steps.jarName.outputs.jarName}}
         jarName=${{steps.jarName.outputs.jarName}}
-        filePath=${jarName##*workflows/}
+        filePath="${jarName##*workflows/}"
         echo filePath
         echo "file=${filePath}" >> #$GITHUB_OUTPUT
+
     - name: commit
       id: commit
       uses: swinton/commit@v2.0.0
