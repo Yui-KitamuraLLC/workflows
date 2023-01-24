@@ -15,11 +15,11 @@ on:
         description: 'original repositories branch name. If not specified, then use "main".'
         required: false
         type: string
-      forwardRepo:
+      destRepo:
         description: 'copy destination repositories "owner/repoName" string value'
         required: true
         type: string
-      forwardBranch:
+      destBranch:
         description: 'copy destination repositories branch name. If not specified, then use "main".'
         required: false
         type: string
