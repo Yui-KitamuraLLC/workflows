@@ -43,12 +43,12 @@ jobs:
     - name: inputInit
       id: inVal
       run: |
-        echo "orgRepo=${{input.originalRepo}}" >> $GITHUB_OUTPUT
-        echo "orgBranch=${${{input.originalBranch}}:-'main'}" >> $GITHUB_OUTPUT
-        echo "destRepo=${{input.destRepo}}" >> $GITHUB_OUTPUT
-        echo "destBranch=${${{input.destBranch}}:-'main'}" >> $GITHUB_OUTPUT
-        echo "tgtFile=${{input.targetFilePath}}" >> $GITHUB_OUTPUT
-        if test ${{input.originalRepo}}${{input.originalBranch}} = ${{input.destRepo}}${{input.destBranch}}; then
+        echo "orgRepo=${{inputs.originalRepo}}" >> $GITHUB_OUTPUT
+        echo "orgBranch=${${{inputs.originalBranch}}:-'main'}" >> $GITHUB_OUTPUT
+        echo "destRepo=${{inputs.destRepo}}" >> $GITHUB_OUTPUT
+        echo "destBranch=${${{inputs.destBranch}}:-'main'}" >> $GITHUB_OUTPUT
+        echo "tgtFile=${{inputs.targetFilePath}}" >> $GITHUB_OUTPUT
+        if test ${{inputs.originalRepo}}${{inputs.originalBranch}} = ${{inputs.destRepo}}${{inputs.destBranch}}; then
           # if target and destination are the same, then exit with failure
           echo "status='failure'" >> $GITHUB_OUTPUT
         fi
