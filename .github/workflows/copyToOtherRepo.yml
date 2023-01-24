@@ -63,8 +63,8 @@ jobs:
     - name: checkOutOrigin
       uses: actions/checkout@v3
       with:
-        repository: ${{ inVal.outputs.orgRepo }}
-        ref: ${{ inVal.outputs.orgBranch }}
+        repository: ${{ steps.inVal.outputs.orgRepo }}
+        ref: ${{ steps.inVal.outputs.orgBranch }}
     - name: git setting
       run: |
         git config --local user.email "copyToOtherRepo.yml@workflow.github.yui.eng.pro"
@@ -72,7 +72,7 @@ jobs:
 
     - name: check file exist
       run: |
-        targetFileFullPath=$GITHUB_WORKSPACE${{inVal.outputs.tgtFile}}
+        targetFileFullPath=$GITHUB_WORKSPACE${{steps.inVal.outputs.tgtFile}}
         if test -f "$targetFileFullPath"; then
           : #checkOk
         else
@@ -83,6 +83,6 @@ jobs:
     - name: checkout destination
       uses: actions/checkout@v3
       with:
-        repository: ${{ inVal.outputs.destRepo }}
-        ref: ${{ inVal.outputs.destBranch }}
+        repository: ${{ steps.inVal.outputs.destRepo }}
+        ref: ${{ steps.inVal.outputs.destBranch }}
 
