@@ -8,16 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  getEnv:
-    runs-on: ubuntu-latest
-    steps:
-      - name: getEnv
-        id: getEnv
-        run: |
-          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-    outputs:
-      branch: ${{ steps.getEnv.outputs.branch }}
-
   call-workflow-passing-data:
     needs: getEnv
-    uses: Yui-KitamuraLLC/workflows/.github/workflows/CopyToOtherRepo.yml@${{needs.getEnv.outputs.branch}}
+    uses: Yui-KitamuraLLC/workflows/.github/workflows/CopyToOtherRepo.yml@${{ github.ref_name }}
