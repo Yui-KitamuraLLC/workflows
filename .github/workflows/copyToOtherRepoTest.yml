@@ -15,7 +15,7 @@ jobs:
       originalBranch: "main"
       destRepo: "Yui-KitamuraLLC/workflows"
       destBranch: "copyToOtherRepo"
-      targetFilePath: "/target/Workflows-1.0.jar"
+      targetFilePath: "/src/test/resources/testFile.txt"
     secrets:
       app_id: ${{secrets.APP_ID}}
       secret: ${{secrets.SECRET}}
