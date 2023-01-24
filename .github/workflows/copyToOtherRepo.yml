@@ -8,8 +8,25 @@ on:
   workflow_call:
     inputs:
       originalRepo:
+        description: 'original repositories "owner/repoName" string value'
+        required: true
+        type: string
+      originalBranch:
+        description: 'original repositories branch name. If not specified, then use "main".'
+        required: false
+        type: string
       forwardRepo:
+        description: 'copy destination repositories "owner/repoName" string value'
+        required: true
+        type: string
+      forwardBranch:
+        description: 'copy destination repositories branch name. If not specified, then use "main".'
+        required: false
+        type: string
       targetFilePath:
+        description: 'copy target file path from project root in the repository. ex:"/target/myPj.jar"' 
+        required: true
+        type: string
     secrets:
       APP_ID:
         description: 'the app_id of your GitHubApp'
