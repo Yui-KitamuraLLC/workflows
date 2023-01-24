@@ -138,3 +138,6 @@ jobs:
         body: |
           build generated jar file on ${{ needs.build.outputs.targetSha }}
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
+          
+    outputs:
+      targetJarName: ${{steps.add.outputs.file}}
