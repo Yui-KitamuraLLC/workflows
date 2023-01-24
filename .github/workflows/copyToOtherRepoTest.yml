@@ -10,4 +10,4 @@ on:
 jobs:
   call-workflow-passing-data:
     needs: getEnv
-    uses: Yui-KitamuraLLC/workflows/.github/workflows/CopyToOtherRepo.yml@${{ github.ref_name }}
+    uses: Yui-KitamuraLLC/workflows/.github/workflows/CopyToOtherRepo.yml@${{github.ref_name}}
