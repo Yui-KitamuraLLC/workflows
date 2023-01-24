@@ -1,0 +1,27 @@
+# This workflow will copy specific file to the other repo
+
+# author KITAMURA Yui (at) Yui-Kitamura LLC.
+
+name: CopyToOtherRepo
+
+on:
+  workflow_call:
+    inputs:
+      originalRepo:
+      forwardRepo:
+      targetFilePath:
+    secrets:
+      APP_ID:
+        description: 'the app_id of your GitHubApp'
+        required: true
+      SECRET:
+        description: 'the secret key of your GitHubApp'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkOutOrigin
+      uses: actions/checkout@v3
