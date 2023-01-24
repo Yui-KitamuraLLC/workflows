@@ -9,5 +9,7 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    needs: getEnv
-    uses: Yui-KitamuraLLC/workflows/.github/workflows/CopyToOtherRepo.yml@$main
+    uses: Yui-KitamuraLLC/workflows/.github/workflows/copyToOtherRepo.yml@main
+    secrets:
+      app_id: ${{secrets.APP_ID}}
+      secret: ${{secrets.SECRET}}
