@@ -62,3 +62,27 @@ jobs:
 
     - name: checkOutOrigin
       uses: actions/checkout@v3
+      with:
+        repository: ${{ inVal.outputs.orgRepo }}
+        ref: ${{ inVal.outputs.orgBranch }}
+    - name: git setting
+      run: |
+        git config --local user.email "copyToOtherRepo.yml@workflow.github.yui.eng.pro"
+        git config --local user.name "GitHub Action"
+
+    - name: check file exist
+      run: |
+        targetFileFullPath=$GITHUB_WORKSPACE${{inVal.outputs.tgtFile}}
+        if test -f "$targetFileFullPath"; then
+          : #checkOk
+        else
+          # if file not exist, then exit workflow with failure status
+          echo "status='failure'" >> $GITHUB_OUTPUT
+        fi
+
+    - name: checkout destination
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ inVal.outputs.destRepo }}
+        ref: ${{ inVal.outputs.destBranch }}
+
