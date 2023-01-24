@@ -10,6 +10,12 @@ on:
 jobs:
   call-workflow-passing-data:
     uses: Yui-KitamuraLLC/workflows/.github/workflows/copyToOtherRepo.yml@main
+    with:
+      originalRepo: "Yui-KitamuraLLC/workflows"
+      originalBranch: "main"
+      destRepo: "Yui-KitamuraLLC/workflows"
+      destBranch: "copyToOtherRepo"
+      targetFilePath: "/target/Workflows-1.0.jar"
     secrets:
       app_id: ${{secrets.APP_ID}}
       secret: ${{secrets.SECRET}}
