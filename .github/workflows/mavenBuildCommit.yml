@@ -127,7 +127,7 @@ jobs:
         files: |
           ${{steps.add.outputs.file}}
         commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
-        ref: refs/heads/main
+        ref: ${{ github.ref }}
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
 
