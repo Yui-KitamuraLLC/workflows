@@ -48,7 +48,7 @@ jobs:
       run: |
         inJdk=${{inputs.jdk}}
         useJdk=${inJdk:-"17"}
-        echo useJdk
+        echo $useJdk
         echo "v=${useJdk}" >> $GITHUB_OUTPUT
 
     - name: Set up JDK
