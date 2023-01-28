@@ -123,6 +123,7 @@ jobs:
         wkBranch=${branch:-${{github.ref_name}}}
         echo ${wkBranch}
         echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
+        echo ${{github.repository}}
 
     - name: commit
       id: commit
