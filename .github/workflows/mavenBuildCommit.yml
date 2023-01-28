@@ -119,8 +119,9 @@ jobs:
         filePath="${jarName##*${repoName}/}"
         echo ${filePath}
         echo "file=${filePath}" >> $GITHUB_OUTPUT
-        branch=${{github.base_ref}}
+        branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
+        echo ${wkBranch}
         echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
 
     - name: commit
