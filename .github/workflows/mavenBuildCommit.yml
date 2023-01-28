@@ -11,6 +11,10 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_call:
+    inputs:
+      jdk:
+        type: string
+        required: false
     secrets:
       APP_ID:
         description: 'the app id of your GitHubApp'
@@ -39,21 +43,23 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Set up JDK 17
+    - name: use jdk version
+      id: useJdkVersion
+      run: |
+        inJdk=${${{inputs.jdk}}:-'17'}
+        echo "v=${inJdk}" >> $GITHUB_OUTPUT
+
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        java-version: ${{steps.useJdkVersion.outputs.v}}
+        distribution: 'temurin' # eclipse jdk
         cache: maven
 
     - name: Build with Maven
       id: mavenBuild
-      run: mvn -B package --file pom.xml
+      run: mvn -B package -DjdkVersion=${{steps.useJdkVersion.outputs.v}} --file pom.xml
 
-    # Error: Could not generate a snapshot of the dependencies; Cannot read properties of undefined (reading 'forEach')
-    #- name: Update dependency graph
-    #  uses: advanced-security/maven-dependency-submission-action@v2.0.1
-      
     - uses: actions/upload-artifact@v3
       id: upload
       with:
