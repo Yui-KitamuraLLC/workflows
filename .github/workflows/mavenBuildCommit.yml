@@ -119,6 +119,9 @@ jobs:
         filePath="${jarName##*${repoName}/}"
         echo ${filePath}
         echo "file=${filePath}" >> $GITHUB_OUTPUT
+        branch=${{github.base_ref}}
+        wkBranch=${branch:-${{github.ref_name}}}
+        echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
 
     - name: commit
       id: commit
@@ -127,7 +130,7 @@ jobs:
         files: |
           ${{steps.add.outputs.file}}
         commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
-        ref: ${{ github.ref }}
+        ref: refs/heads/${{steps.add.outputs.tgtBranch}}
       env:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
 
