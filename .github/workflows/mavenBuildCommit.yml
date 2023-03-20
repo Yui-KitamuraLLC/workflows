@@ -127,7 +127,7 @@ jobs:
 
     - name: commit
       id: commit
-      uses: swinton/commit@v2.0.0
+      uses: yui-Kitamura/commit@2.0.1-pre
       with:
         files: |
           ${{steps.add.outputs.file}}
