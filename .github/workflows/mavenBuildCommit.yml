@@ -127,7 +127,7 @@ jobs:
 
     - name: commit
       id: commit
-      uses: yui-Kitamura/commit@2.0.1-pre
+      uses: yui-Kitamura/commit@2.0.1-pre2
       with:
         files: |
           ${{steps.add.outputs.file}}
