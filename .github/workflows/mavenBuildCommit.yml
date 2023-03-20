@@ -86,7 +86,7 @@ jobs:
         path: target
 
     - name: echo-dl-path
-      run: ls -R --si
+      run: ls -R -l -h
       working-directory: ${{steps.download.outputs.download-path}}
 
     - name: jarName
