@@ -107,11 +107,11 @@ jobs:
       run: |
         git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        echo ${jarName}
+        echo "jarName="${jarName}
         for jn in $jarName; do
            filePath="${filePath} ${jarName}"
-           echo ${filePath}
         done
+        echo "filePath="${filePath}
         echo "file=\"${filePath}\"" >> $GITHUB_OUTPUT
 
         branch=${{github.head_ref}}
