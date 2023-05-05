@@ -93,8 +93,8 @@ jobs:
       id: jarName
       run: |
         find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*
-        jar_name=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        echo "jarName=${{toJson($jar_name)}}" >> $GITHUB_OUTPUT
+        set jar_name=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
+        echo "jarName=${{toJson(jar_name)}}" >> $GITHUB_OUTPUT
 
     - name: Get github token
       id: generate_token
