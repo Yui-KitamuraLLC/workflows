@@ -89,17 +89,6 @@ jobs:
       run: ls -R -l -h
       working-directory: ${{steps.download.outputs.download-path}}
 
-    - name: jarNameEv
-      id: jarNameEv
-      run: |
-        find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*
-        export JAR_NAME=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-    - name: jarName
-      id: jarName
-      run: |
-        echo ${{env.JAR_NAME}}
-        echo "jarName=${{toJson(env.JAR_NAME)}}" >> $GITHUB_OUTPUT
-
     - name: Get github token
       id: generate_token
       uses: tibdex/github-app-token@v1
@@ -116,8 +105,8 @@ jobs:
       id: add
       shell: bash
       run: |
-        git add ${{fromJson(steps.jarName.outputs.jarName)}}
-        jarName=${{fromJson(steps.jarName.outputs.jarName)}}
+        git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
+        jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         repoFull=${{github.repository}}
         repoName=${repoFull#${{github.repository_owner}}/}
         for jn in $jarName; do
