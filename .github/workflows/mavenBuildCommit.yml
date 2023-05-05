@@ -107,17 +107,18 @@ jobs:
       run: |
         git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        repoFull=${{github.repository}}
-        repoName=${repoFull#${{github.repository_owner}}/}
+        echo ${jarName}
         for jn in $jarName; do
            filePath="${filePath} ${jarName##*${repoName}/}"
            echo ${filePath}
         done
         echo "file=${filePath}" >> $GITHUB_OUTPUT
 
+        repoFull=${{github.repository}}
+        repoName=${repoFull#${{github.repository_owner}}/}
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
-        echo ${{github.repository}}
+        echo ${repoFull}
         echo ${wkBranch}
         echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
 
