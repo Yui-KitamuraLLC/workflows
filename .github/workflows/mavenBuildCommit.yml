@@ -125,8 +125,7 @@ jobs:
       id: commit
       uses: yui-Kitamura/commit@2.0.1
       with:
-        files: |
-          ${{steps.add.outputs.file}}
+        files: ${{steps.add.outputs.file}}
         commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
         ref: refs/heads/${{steps.add.outputs.tgtBranch}}
       env:
