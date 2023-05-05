@@ -111,7 +111,7 @@ jobs:
         for ((i=0; i<${#jarName[@]}; i++)); do
           if test i==0
           then
-            filePath=${jarName[0]##*${repoName}/}
+            filePath=${jarName[0]##*${${{github.repository}}#${{github.repository_owner}}/}/}
           else
             filePath="${filePath ${jarName[i]}"
           fi
