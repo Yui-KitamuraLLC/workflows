@@ -124,9 +124,7 @@ jobs:
       uses: yui-Kitamura/commit@2.0.1
       with:
         files: |
-          $(for file in ${{steps.add.outputs.file}}; do
-            echo $file 
-          done)
+          ${{steps.add.outputs.file}}
         commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
         ref: refs/heads/${{steps.add.outputs.tgtBranch}}
       env:
