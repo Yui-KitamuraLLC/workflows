@@ -97,6 +97,7 @@ jobs:
     - name: jarName
       id: jarName
       run: |
+        echo ${{env.JAR_NAME}}
         echo "jarName=${{toJson(env.JAR_NAME)}}" >> $GITHUB_OUTPUT
 
     - name: Get github token
