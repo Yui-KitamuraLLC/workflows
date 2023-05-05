@@ -109,16 +109,13 @@ jobs:
         jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         echo ${jarName}
         for jn in $jarName; do
-           filePath="${filePath} ${jarName##*${repoName}/}"
+           filePath="${filePath} ${jarName}"
            echo ${filePath}
         done
         echo "file=${filePath}" >> $GITHUB_OUTPUT
 
-        repoFull=${{github.repository}}
-        repoName=${repoFull#${{github.repository_owner}}/}
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
-        echo ${repoFull}
         echo ${wkBranch}
         echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
 
