@@ -94,7 +94,7 @@ jobs:
       run: |
         find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*
         jar_name=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        echo "jarName=${{toJson($jar_name)}}" >> $GITHUB_OUTPUT
+        echo "jarName=${{toJson(jar_name)}}" >> $GITHUB_OUTPUT
 
     - name: Get github token
       id: generate_token
@@ -116,8 +116,10 @@ jobs:
         jarName=${{fromJson(steps.jarName.outputs.jarName)}}
         repoFull=${{github.repository}}
         repoName=${repoFull#${{github.repository_owner}}/}
-        filePath="${jarName##*${repoName}/}"
-        echo ${filePath}
+        for jn in $jarName; do
+           filePath="${filePath} ${jarName##*${repoName}/}"
+           echo ${filePath}
+        done
         echo "file=${filePath}" >> $GITHUB_OUTPUT
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
