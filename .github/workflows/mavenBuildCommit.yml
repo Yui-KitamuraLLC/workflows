@@ -109,7 +109,7 @@ jobs:
         jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         echo "jarName="${jarName}
         for jn in $jarName; do
-           filePath="${filePath} ${jarName}"
+           filePath="${filePath} ${jn}"
         done
         echo "filePath="${filePath}
         echo "file=\"${filePath}\"" >> $GITHUB_OUTPUT
