@@ -113,7 +113,7 @@ jobs:
           then
             filePath=${jarName[0]##*${${{github.repository}}#${{github.repository_owner}}/}/}
           else
-            filePath="${filePath ${jarName[i]}"
+            filePath="${filePath} ${jarName[i]}"
           fi
         done
         echo "filePath="${filePath}
