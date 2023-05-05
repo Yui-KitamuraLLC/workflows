@@ -94,7 +94,9 @@ jobs:
       run: |
         find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*
         jar_name=`find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*`
-        echo ${jar_name}
+        for a in $jar_name; do
+           echo $a
+        done
         echo "jarName=${jar_name}" >> $GITHUB_OUTPUT
 
     - name: Get github token
