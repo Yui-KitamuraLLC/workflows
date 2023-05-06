@@ -106,7 +106,7 @@ jobs:
       shell: bash
       run: |
         git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
+        jarName=`find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*`
         echo "jarName="${jarName}
         
         repoFull=${{github.repository}}
