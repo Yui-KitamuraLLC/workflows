@@ -117,7 +117,7 @@ jobs:
           fi
         done
         echo "filePath="${filePath}
-        echo "file=${filePath}" >> $GITHUB_OUTPUT
+        echo "file=\"${filePath}\"" >> $GITHUB_OUTPUT
 
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
@@ -129,7 +129,7 @@ jobs:
       uses: yui-Kitamura/commit@2.0.1
       with:
         files: |
-          ${{steps.add.outputs.file}}
+          ${{steps.add.outputs.file//\"//}}
         commit-message: build jar file by GitHubAction(maven.yml) [skip ci]
         ref: refs/heads/${{steps.add.outputs.tgtBranch}}
       env:
