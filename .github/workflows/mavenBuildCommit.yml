@@ -89,13 +89,6 @@ jobs:
       run: ls -R -l -h
       working-directory: ${{steps.download.outputs.download-path}}
 
-    - name: jarName
-      id: jarName
-      run: |
-        find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*
-        jar_name=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        echo "jarName=${jar_name}" >> $GITHUB_OUTPUT
-
     - name: Get github token
       id: generate_token
       uses: tibdex/github-app-token@v1
@@ -112,18 +105,27 @@ jobs:
       id: add
       shell: bash
       run: |
-        git add ${{steps.jarName.outputs.jarName}}
-        jarName=${{steps.jarName.outputs.jarName}}
+        git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
+        jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
+        echo "jarName="${jarName}
+        
         repoFull=${{github.repository}}
         repoName=${repoFull#${{github.repository_owner}}/}
-        filePath="${jarName##*${repoName}/}"
-        echo ${filePath}
-        echo "file=${filePath}" >> $GITHUB_OUTPUT
+        for ((i=0; i<${#jarName[@]}; i++)); do
+          if [ $i -eq 0 ]
+          then
+            filePath=${jarName[0]##*${repoName}/}
+          else
+            filePath="${filePath} ${jarName[$i]}"
+          fi
+        done
+        echo "filePath="${filePath}
+        echo "file="${filePath} >> $GITHUB_OUTPUT
+
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
         echo ${wkBranch}
         echo "tgtBranch=${wkBranch}" >> $GITHUB_OUTPUT
-        echo ${{github.repository}}
 
     - name: commit
       id: commit
