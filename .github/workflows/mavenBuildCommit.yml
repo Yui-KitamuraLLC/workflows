@@ -117,7 +117,7 @@ jobs:
           fi
         done
         echo "filePath="${filePath}
-        echo "file=\"${filePath}\"" >> $GITHUB_OUTPUT
+        echo "file="\"${filePath}\" >> $GITHUB_OUTPUT
 
         branch=${{github.head_ref}}
         wkBranch=${branch:-${{github.ref_name}}}
