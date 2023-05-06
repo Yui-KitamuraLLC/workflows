@@ -114,8 +114,10 @@ jobs:
         for ((i=0; i<${#jarName[@]}; i++)); do
           if [ $i -eq 0 ]
           then
+            echo "0 and "${jarName[0]##*{repoName}/}
             filePath=${jarName[0]##*${repoName}/}
           else
+            echo $i" and "${jarName[$i]}
             filePath=${filePath}" "${jarName[$i]}
           fi
         done
