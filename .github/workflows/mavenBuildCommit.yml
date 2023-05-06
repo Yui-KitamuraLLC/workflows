@@ -116,7 +116,7 @@ jobs:
           then
             filePath=${jarName[0]##*${repoName}/}
           else
-            filePath="${filePath} ${jarName[i]}"
+            filePath="${filePath} ${jarName[$i]}"
           fi
         done
         echo "filePath="${filePath}
