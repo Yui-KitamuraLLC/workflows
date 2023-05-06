@@ -106,7 +106,7 @@ jobs:
       shell: bash
       run: |
         git add $(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
-        jarName=`find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*`
+        jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         echo "jarName="${jarName}
         
         repoFull=${{github.repository}}
@@ -114,11 +114,9 @@ jobs:
         for ((i=0; i<${#jarName[@]}; i++)); do
           if [ $i -eq 0 ]
           then
-            echo "0 and "${jarName[0]##*{repoName}/}
             filePath=${jarName[0]##*${repoName}/}
           else
-            echo $i" and "${jarName[$i]}
-            filePath=${filePath}" "${jarName[$i]}
+            filePath="${filePath} ${jarName[$i]}"
           fi
         done
         echo "filePath="${filePath}
