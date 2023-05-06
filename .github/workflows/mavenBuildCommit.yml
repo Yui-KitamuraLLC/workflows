@@ -109,7 +109,7 @@ jobs:
         jarName=$(find ${{steps.download.outputs.download-path}} -name *.jar -not -name original*)
         echo "jarName="${jarName}
         for ((i=0; i<${#jarName[@]}; i++)); do
-          if [i == 0]
+          if test $i -eq 0
           then
             repoFull=${{github.repository}}
             repoName=${repoFull#${{github.repository_owner}}/}
