@@ -62,7 +62,7 @@ jobs:
       id: mavenBuild
       run: mvn -B package -DjdkVersion=${{steps.useJdkVersion.outputs.v}} --file pom.xml
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4.4.0
       id: upload
       with:
         name: 'Package'
