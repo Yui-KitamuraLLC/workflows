@@ -41,7 +41,7 @@ jobs:
       run: echo "SHA=${{ env.TARGET_SHA }}" >> $GITHUB_OUTPUT
     - run: echo ${{steps.targetSha.outputs.SHA}}
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: use jdk version
       id: useJdkVersion
@@ -52,7 +52,7 @@ jobs:
         echo "v=${useJdk}" >> $GITHUB_OUTPUT
 
     - name: Set up JDK
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4.5.0
       with:
         java-version: ${{steps.useJdkVersion.outputs.v}}
         distribution: 'temurin'
@@ -76,11 +76,11 @@ jobs:
     needs: build
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: download-build
       id: download
-      uses: actions/download-artifact@v4.1.7
+      uses: actions/download-artifact@v4.1.8
       with:
         name: 'Package'
         path: target
@@ -139,7 +139,7 @@ jobs:
         GH_TOKEN: ${{ steps.generate_token.outputs.token }}
 
     - name: create-commit-comment-orgCmt
-      uses: peter-evans/commit-comment@v2
+      uses: peter-evans/commit-comment@v3
       with:
         sha: ${{ needs.build.outputs.targetSha }}
         body: |
@@ -147,7 +147,7 @@ jobs:
           - Created by [commit-comment](https://github.com/marketplace/actions/commit-comment)
 
     - name: create-commit-comment-jarCmt
-      uses: peter-evans/commit-comment@v2
+      uses: peter-evans/commit-comment@v3
       with:
         sha: ${{ steps.commit.outputs.commit-sha }}
         body: |
